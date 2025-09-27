@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PharmaExpress</title>
+  <style>
+    body { font-family: Arial; margin: 0; padding: 0; background: #f2f2f2; }
+    header { background: teal; color: white; padding: 20px; text-align: center; }
+    .container { padding: 20px; }
+    .medicine, .form-section { background: white; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
+    .medicine h3 { margin: 0; }
+    .order-btn { background: teal; color: white; border: none; padding: 10px; cursor: pointer; margin-top: 10px; }
+    .order-btn:hover { background: darkcyan; }
+    .hidden { display: none; }
+    input, select { padding: 8px; width: 100%; margin: 5px 0; }
+    button.submit-btn { background: green; color: white; padding: 10px; border: none; cursor: pointer; }
+ </style>
+</head>
+<body>
+
+<header>
+  <h1>PharmaExpress 🚚</h1>
+  <p>Fast & Reliable Medicine Delivery</p>
+</header>
+
+<div class="container">
+  <div class="medicine">
+    <h3>Paracetamol 500mg</h3>
+    <p>Price: ₹25</p>
+    <button class="order-btn" onclick="showForm('Paracetamol')">Order Now</button>
+  </div>
+
+  <div class="medicine">
+    <h3>Amoxicillin 250mg</h3>
+    <p>Price: ₹60</p>
+    <button class="order-btn" onclick="showForm('Amoxicillin')">Order Now</button>
+  </div>
+
+  <div class="medicine">
+    <h3>Cetirizine 10mg</h3>
+    <p>Price: ₹15</p>
+    <button class="order-btn" onclick="showForm('Cetirizine')">Order Now</button>
+  </div>
+
+  <div id="formSection" class="form-section hidden">
+ <h3>Enter Delivery & Payment Details</h3>
+    <form onsubmit="submitOrder(event)">
+      <input type="text" id="customerName" placeholder="Full Name" required />
+      <input type="text" id="address" placeholder="Delivery Address" required />
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+      <select id="paymentMethod" required>
+        <option value="">Select Payment Method</option>
+        <option value="UPI">UPI</option>
+        <option value="Card">Credit/Debit Card</option>
+        <option value="COD">Cash on Delivery</option>
+      </select>
+      <input type="text" id="paymentDetails" placeholder="Payment Details (e.g. UPI ID or Card No)" required />
+      <input type="hidden" id="selectedMedicine" />
+      <button class="submit-btn" type="submit">Place Order</button>
+    </form>
+  </div>
+</div>
+<script>
+  function showForm(medicine) {
+    document.getElementById('formSection').classList.remove('hidden');
+    document.getElementById('selectedMedicine').value = medicine;
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function submitOrder(event) {
+    event.preventDefault();
+    const name = document.getElementById('customerName').value;
+    const medicine = document.getElementById('selectedMedicine').value;
+    alert(Thank you ${name}! Your order for ${medicine} has been placed.);
+    document.getElementById('formSection').classList.add('hidden');
+    event.target.reset();
+  }
+</script>
+
+</body>
+</html>
